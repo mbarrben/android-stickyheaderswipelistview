@@ -26,26 +26,26 @@
     <packaging>apklib</packaging>
     <name>android-swipelistview-lib</name>
     <description>An Android List View implementation with support for drawable cells and many other swipe related features</description>
-    <url>https://github.com/47deg/${project.name-github}</url>
+    <url>https://github.com/47deg/${project.name.github}</url>
     <inceptionYear>2013</inceptionYear>
 
     <properties>
         <platform.version>4.1.1.4</platform.version>
-        <project.name-github>android-swipelistview</project.name-github>
+        <project.name.github>android-swipelistview</project.name.github>
         <scm.branch>master</scm.branch>
         <android.sdk.path>/Applications/android-sdk-macosx</android.sdk.path>
     </properties>
 
     <scm>
-        <url>https://github.com/47deg/${project.name-github}/tree/${scm.branch}</url>
-        <connection>scm:git:git://github.com/47deg/${project.name-github}.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/47deg/${project.name-github}.git</developerConnection>
+        <url>https://github.com/47deg/${project.name.github}/tree/${scm.branch}</url>
+        <connection>scm:git:git://github.com/47deg/${project.name.github}.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/47deg/${project.name.github}.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
     <issueManagement>
         <system>Github Issue Tracking</system>
-        <url>https://github.com/47deg/${project.name-github}/issues</url>
+        <url>https://github.com/47deg/${project.name.github}/issues</url>
     </issueManagement>
 
     <distributionManagement>
