@@ -77,13 +77,15 @@
         </dependency>
         <dependency>
             <groupId>com.google.android</groupId>
-            <artifactId>support-v13</artifactId>
-            <version>r8</version>
+            <artifactId>support-v4</artifactId>
+            <version>r7</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.nineoldandroids</groupId>
             <artifactId>nineoldandroids</artifactId>
             <version>2.4.0</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
