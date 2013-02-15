@@ -129,6 +129,7 @@
                     <!--<suffix>.${maven.build.timestamp}</suffix>-->
                     <includes>
                         <include>*.jar</include>
+                        <include>*.apklib</include>
                     </includes>
                     <override>true</override>
                 </configuration>
