@@ -55,21 +55,34 @@ public class SwipeListView extends ListView {
 
     private SwipeListViewTouchListener touchListener;
 
+    /**
+     * @see ListView#ListView(android.content.Context)
+     */
     public SwipeListView(Context context) {
         super(context);
         init(null);
     }
 
+    /**
+     * @see ListView#ListView(android.content.Context, android.util.AttributeSet)
+     */
     public SwipeListView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(attrs);
     }
 
+    /**
+     * @see ListView#ListView(android.content.Context, android.util.AttributeSet, int)
+     */
     public SwipeListView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(attrs);
     }
 
+    /**
+     * Init ListView
+     * @param attrs AttributeSet
+     */
     private void init(AttributeSet attrs) {
 
         int swipeMode = SWIPE_MODE_BOTH;
@@ -119,6 +132,9 @@ public class SwipeListView extends ListView {
         setOnScrollListener(touchListener.makeScrollListener());
     }
 
+    /**
+     * @see ListView#setAdapter(android.widget.ListAdapter)
+     */
     @Override
     public void setAdapter(ListAdapter adapter) {
         super.setAdapter(adapter);
@@ -133,104 +149,211 @@ public class SwipeListView extends ListView {
         });
     }
 
+    /**
+     * Open item of ListView
+     *
+     * @param position Position that you want open
+     */
     public void openAnimate(int position) {
         touchListener.openAnimate(position);
     }
 
+    /**
+     * Close item of ListView
+     *
+     * @param position Position that you want open
+     */
     public void closeAnimate(int position) {
         touchListener.closeAnimate(position);
     }
 
+    /**
+     * Call onDismiss method of Listener
+     *
+     * @param reverseSortedPositions All positions that remove the user
+     */
     protected void onDismiss(int[] reverseSortedPositions) {
         if (swipeListViewListener != null) {
             swipeListViewListener.onDismiss(reverseSortedPositions);
         }
     }
 
+    /**
+     * Call onClickFrontView method of Listener
+     *
+     * @param position Position cliked
+     */
     protected void onClickFrontView(int position) {
         if (swipeListViewListener != null) {
             swipeListViewListener.onClickFrontView(position);
         }
     }
 
+    /**
+     * Call onClickBackView method of Listener
+     *
+     * @param position Position clicked
+     */
     protected void onClickBackView(int position) {
         if (swipeListViewListener != null) {
             swipeListViewListener.onClickBackView(position);
         }
     }
 
+    /**
+     * Call onOpened method of Listener
+     *
+     * @param position Item opened
+     * @param toRight  If open to right
+     */
     protected void onOpened(int position, boolean toRight) {
         if (swipeListViewListener != null) {
             swipeListViewListener.onOpened(position, toRight);
         }
     }
 
+    /**
+     * Call onClosed method of Listener
+     *
+     * @param position  Item closed
+     * @param fromRight If open from right
+     */
     protected void onClosed(int position, boolean fromRight) {
         if (swipeListViewListener != null) {
             swipeListViewListener.onClosed(position, fromRight);
         }
     }
 
+    /**
+     * Call onListChanged method of Listener
+     */
     protected void onListChanged() {
         if (swipeListViewListener != null) {
             swipeListViewListener.onListChanged();
         }
     }
 
+    /**
+     * Call onMove method of Listener
+     *
+     * @param position Item moving
+     * @param x        Current position
+     */
     protected void onMove(int position, float x) {
         if (swipeListViewListener != null) {
             swipeListViewListener.onMove(position, x);
         }
     }
 
+    /**
+     * Set Listener
+     *
+     * @param swipeListViewListener Listener
+     */
     public void setSwipeListViewListener(SwipeListViewListener swipeListViewListener) {
         this.swipeListViewListener = swipeListViewListener;
     }
 
+    /**
+     * Reset scrolling
+     */
     public void resetScrolling() {
         touchState = TOUCH_STATE_REST;
     }
 
+    /**
+     * Set offset on right
+     *
+     * @param offsetRight Offset
+     */
     public void setOffsetRight(float offsetRight) {
         touchListener.setOffsetRight(offsetRight);
     }
 
+    /**
+     * Set offset on left
+     *
+     * @param offsetLeft Offset
+     */
     public void setOffsetLeft(float offsetLeft) {
         touchListener.setOffsetLeft(offsetLeft);
     }
 
+    /**
+     * Set if all item opened will be close when the user move ListView
+     *
+     * @param swipeCloseAllItemsWhenMoveList
+     */
     public void setSwipeCloseAllItemsWhenMoveList(boolean swipeCloseAllItemsWhenMoveList) {
         touchListener.setSwipeCloseAllItemsWhenMoveList(swipeCloseAllItemsWhenMoveList);
     }
 
+    /**
+     * Set if the user can open an item with long press on cell
+     *
+     * @param swipeOpenOnLongPress
+     */
     public void setSwipeOpenOnLongPress(boolean swipeOpenOnLongPress) {
         touchListener.setSwipeOpenOnLongPress(swipeOpenOnLongPress);
     }
 
+    /**
+     * Set swipe mode
+     *
+     * @param swipeMode
+     */
     public void setSwipeMode(int swipeMode) {
         touchListener.setSwipeMode(swipeMode);
     }
 
-    public float getSwipeActionLeft() {
+    /**
+     * Return action on left
+     *
+     * @return Action
+     */
+    public int getSwipeActionLeft() {
         return touchListener.getSwipeActionLeft();
     }
 
+    /**
+     * Set action on left
+     *
+     * @param swipeActionLeft Action
+     */
     public void setSwipeActionLeft(int swipeActionLeft) {
         touchListener.setSwipeActionLeft(swipeActionLeft);
     }
 
-    public float getSwipeActionRight() {
+    /**
+     * Return action on right
+     *
+     * @return Action
+     */
+    public int getSwipeActionRight() {
         return touchListener.getSwipeActionRight();
     }
 
+    /**
+     * Set action on right
+     *
+     * @param swipeActionRight Action
+     */
     public void setSwipeActionRight(int swipeActionRight) {
         touchListener.setSwipeActionRight(swipeActionRight);
     }
 
+    /**
+     * Set animation time when user drop cell
+     *
+     * @param animationTime milliseconds
+     */
     public void setAnimationTime(long animationTime) {
         touchListener.setAnimationTime(animationTime);
     }
 
+    /**
+     * @see ListView#onInterceptTouchEvent(android.view.MotionEvent)
+     */
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         int action = MotionEventCompat.getActionMasked(ev);
@@ -243,10 +366,11 @@ public class SwipeListView extends ListView {
 
         switch (action) {
             case MotionEvent.ACTION_MOVE:
-                checkInMovingX(x, y);
-                return touchState==TOUCH_STATE_SCROLLING_Y;
+                checkInMoving(x, y);
+                return touchState == TOUCH_STATE_SCROLLING_Y;
             case MotionEvent.ACTION_DOWN:
                 touchListener.onTouch(this, ev);
+                touchState = TOUCH_STATE_REST;
                 lastMotionX = x;
                 lastMotionY = y;
                 return false;
@@ -255,16 +379,21 @@ public class SwipeListView extends ListView {
                 break;
             case MotionEvent.ACTION_UP:
                 touchListener.onTouch(this, ev);
-                touchState = TOUCH_STATE_REST;
-                return touchState==TOUCH_STATE_SCROLLING_Y;
+                return touchState == TOUCH_STATE_SCROLLING_Y;
             default:
                 break;
         }
 
-        return true;
+        return super.onInterceptTouchEvent(ev);
     }
 
-    private void checkInMovingX(float x, float y) {
+    /**
+     * Check if the user is moving cell
+     *
+     * @param x Position X
+     * @param y Position Y
+     */
+    private void checkInMoving(float x, float y) {
         final int xDiff = (int) Math.abs(x - lastMotionX);
         final int yDiff = (int) Math.abs(y - lastMotionY);
 

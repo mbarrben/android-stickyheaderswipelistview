@@ -20,18 +20,48 @@ package com.fortysevendeg.android.swipelistview;
 
 public interface SwipeListViewListener {
 
+    /**
+     * Called when finish animation open
+     * @param position Item of list
+     * @param toRight Open to right
+     */
     void onOpened(int position, boolean toRight);
 
+    /**
+     * Called when finish animation close
+     * @param position Item of list
+     * @param fromRight Close from right
+     */
     void onClosed(int position, boolean fromRight);
 
+    /**
+     * Called when list changed
+     */
     void onListChanged();
 
+    /**
+     * Called when user is moving an item
+     * @param position Item of list
+     * @param x Current position X
+     */
     void onMove(int position, float x);
 
+    /**
+     * Called when user click on front view
+     * @param position Item of list
+     */
     void onClickFrontView(int position);
 
+    /**
+     * Called when user click on back view
+     * @param position Item of list
+     */
     void onClickBackView(int position);
 
+    /**
+     * Called when user dismiss items
+     * @param reverseSortedPositions Items dismisses
+     */
     void onDismiss(int[] reverseSortedPositions);
 
 }
