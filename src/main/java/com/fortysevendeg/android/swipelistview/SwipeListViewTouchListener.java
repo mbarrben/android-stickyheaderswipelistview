@@ -36,11 +36,14 @@ import static com.nineoldandroids.view.ViewHelper.setAlpha;
 import static com.nineoldandroids.view.ViewHelper.setTranslationX;
 import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
 
+/**
+ * Touch listener impl for the SwipeListView
+ */
 public class SwipeListViewTouchListener implements View.OnTouchListener {
 
     private int swipeMode = SwipeListView.SWIPE_MODE_BOTH;
     private boolean swipeOpenOnLongPress = true;
-    private boolean swipeCloseAllItemsWhenMoveList = true;
+    private boolean swipeClosesAllItemsWhenListMoves = true;
 
     private int swipeFrontView = 0;
     private int swipeBackView = 0;
@@ -52,8 +55,8 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
     private long configShortAnimationTime;
     private long animationTime;
 
-    private float offsetLeft = 0;
-    private float offsetRight = 0;
+    private float leftOffset = 0;
+    private float rightOffset = 0;
 
     // Fixed properties
     private SwipeListView swipeListView;
@@ -83,8 +86,8 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
     /**
      * Constructor
      * @param swipeListView SwipeListView
-     * @param swipeFrontView Identifier of front view
-     * @param swipeBackView Identifier of back view
+     * @param swipeFrontView front view Identifier
+     * @param swipeBackView back view Identifier
      */
     public SwipeListViewTouchListener(SwipeListView swipeListView, int swipeFrontView, int swipeBackView) {
         this.swipeFrontView = swipeFrontView;
@@ -99,7 +102,7 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
     }
 
     /**
-     * Set parent view of current item
+     * Sets current item's parent view
      * @param parentView Parent view
      */
     private void setParentView(View parentView) {
@@ -107,7 +110,7 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
     }
 
     /**
-     * Set front view of current item
+     * Sets current item's front view
      * @param frontView Front view
      */
     private void setFrontView(View frontView) {
@@ -130,7 +133,7 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
     }
 
     /**
-     * Set back view of current item
+     * Set current item's back view
      * @param backView
      */
     private void setBackView(View backView) {
@@ -144,15 +147,14 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
     }
 
     /**
-     * Return if list is moving
-     * @return
+     * @return true if the list is in motion
      */
     public boolean isListViewMoving() {
         return listViewMoving;
     }
 
     /**
-     * Set animation time when user drop cell
+     * Sets animation time when the user drops the cell
      *
      * @param animationTime milliseconds
      */
@@ -165,30 +167,30 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
     }
 
     /**
-     * Set offset on right
+     * Sets the right offset
      *
-     * @param offsetRight Offset
+     * @param rightOffset Offset
      */
-    public void setOffsetRight(float offsetRight) {
-        this.offsetRight = offsetRight;
+    public void setRightOffset(float rightOffset) {
+        this.rightOffset = rightOffset;
     }
 
     /**
-     * Set offset on left
+     * Set the left offset
      *
-     * @param offsetLeft Offset
+     * @param leftOffset Offset
      */
-    public void setOffsetLeft(float offsetLeft) {
-        this.offsetLeft = offsetLeft;
+    public void setLeftOffset(float leftOffset) {
+        this.leftOffset = leftOffset;
     }
 
     /**
      * Set if all item opened will be close when the user move ListView
      *
-     * @param swipeCloseAllItemsWhenMoveList
+     * @param swipeClosesAllItemsWhenListMoves
      */
-    public void setSwipeCloseAllItemsWhenMoveList(boolean swipeCloseAllItemsWhenMoveList) {
-        this.swipeCloseAllItemsWhenMoveList = swipeCloseAllItemsWhenMoveList;
+    public void setSwipeClosesAllItemsWhenListMoves(boolean swipeClosesAllItemsWhenListMoves) {
+        this.swipeClosesAllItemsWhenListMoves = swipeClosesAllItemsWhenListMoves;
     }
 
     /**
@@ -201,7 +203,7 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
     }
 
     /**
-     * Set swipe mode
+     * Sets the swipe mode
      *
      * @param swipeMode
      */
@@ -246,7 +248,7 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
     }
 
     /**
-     * Add new items when adapter is modified
+     * Adds new items when adapter is modified
      */
     public void resetItems() {
         if (swipeListView.getAdapter() != null) {
@@ -276,7 +278,7 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
 
     /**
      * Open item
-     * @param view View that you need move
+     * @param view affected view
      * @param position Position of list
      */
     private void openAnimate(View view, int position) {
@@ -287,7 +289,7 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
 
     /**
      * Close item
-     * @param view View that you need move
+     * @param view affected view
      * @param position Position of list
      */
     private void closeAnimate(View view, int position) {
@@ -298,8 +300,8 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
 
     /**
      * Create animation
-     * @param view View that you need move
-     * @param swap If will change state. If is "false" returns to the original position
+     * @param view affected view
+     * @param swap If state should change. If "false" returns to the original position
      * @param swapRight If swap is true, this parameter tells if move is to the right or left
      * @param position Position of list
      */
@@ -313,8 +315,8 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
     }
 
     /**
-     * Create animation for dismiss
-     * @param view View that you need move
+     * Create dismiss animation
+     * @param view affected view
      * @param swap If will change state. If is "false" returns to the original position
      * @param swapRight If swap is true, this parameter tells if move is to the right or left
      * @param position Position of list
@@ -323,11 +325,11 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
         int moveTo = 0;
         if (opened.get(position)) {
             if (!swap) {
-                moveTo = openedRight.get(position) ? (int) (viewWidth - offsetRight) : (int) (-viewWidth + offsetLeft);
+                moveTo = openedRight.get(position) ? (int) (viewWidth - rightOffset) : (int) (-viewWidth + leftOffset);
             }
         } else {
             if (swap) {
-                moveTo = swapRight ? (int) (viewWidth - offsetRight) : (int) (-viewWidth + offsetLeft);
+                moveTo = swapRight ? (int) (viewWidth - rightOffset) : (int) (-viewWidth + leftOffset);
             }
         }
 
@@ -353,21 +355,21 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
     }
 
     /**
-     * Create animation for reveal
-     * @param view View that you need move
-     * @param swap If will change state. If is "false" returns to the original position
-     * @param swapRight If swap is true, this parameter tells if move is to the right or left
-     * @param position Position of list
+     * Create reveal animation
+     * @param view affected view
+     * @param swap If will change state. If "false" returns to the original position
+     * @param swapRight If swap is true, this parameter tells if movement is toward right or left
+     * @param position list position
      */
     private void generateRevealAnimate(final View view, final boolean swap, final boolean swapRight, final int position) {
         int moveTo = 0;
         if (opened.get(position)) {
             if (!swap) {
-                moveTo = openedRight.get(position) ? (int) (viewWidth - offsetRight) : (int) (-viewWidth + offsetLeft);
+                moveTo = openedRight.get(position) ? (int) (viewWidth - rightOffset) : (int) (-viewWidth + leftOffset);
             }
         } else {
             if (swap) {
-                moveTo = swapRight ? (int) (viewWidth - offsetRight) : (int) (-viewWidth + offsetLeft);
+                moveTo = swapRight ? (int) (viewWidth - rightOffset) : (int) (-viewWidth + leftOffset);
             }
         }
 
@@ -409,8 +411,8 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
             @Override
             public void onScrollStateChanged(AbsListView absListView, int scrollState) {
                 setEnabled(scrollState != AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL);
-                if (swipeCloseAllItemsWhenMoveList && scrollState == SCROLL_STATE_TOUCH_SCROLL) {
-                    closeItemsOpened();
+                if (swipeClosesAllItemsWhenListMoves && scrollState == SCROLL_STATE_TOUCH_SCROLL) {
+                    closeOpenedItems();
                 }
                 if (scrollState==SCROLL_STATE_TOUCH_SCROLL) {
                     listViewMoving = true;
@@ -428,9 +430,9 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
     }
 
     /**
-     * Close all item opened
+     * Close all opened items
      */
-    private void closeItemsOpened() {
+    private void closeOpenedItems() {
         if (opened != null) {
             int start = swipeListView.getFirstVisiblePosition();
             int end = swipeListView.getLastVisiblePosition();
@@ -595,7 +597,7 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
 
                 if (swiping) {
                     if (opened.get(downPosition)) {
-                        deltaX += openedRight.get(downPosition) ? viewWidth - offsetRight : -viewWidth + offsetLeft;
+                        deltaX += openedRight.get(downPosition) ? viewWidth - rightOffset : -viewWidth + leftOffset;
                     }
                     move(deltaX);
                     return true;
@@ -607,7 +609,7 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
     }
 
     /**
-     * Move view
+     * Moves the view
      * @param deltaX delta
      */
     public void move(float deltaX) {
@@ -622,7 +624,7 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
     }
 
     /**
-     * Class that save pending dismiss data
+     * Class that saves pending dismiss data
      */
     class PendingDismissData implements Comparable<PendingDismissData> {
         public int position;
