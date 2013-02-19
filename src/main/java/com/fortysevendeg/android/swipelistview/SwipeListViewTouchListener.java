@@ -21,6 +21,7 @@
 package com.fortysevendeg.android.swipelistview;
 
 import android.graphics.Rect;
+import android.os.Handler;
 import android.view.*;
 import android.widget.AbsListView;
 import android.widget.ListView;
@@ -47,6 +48,8 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
 
     private int swipeFrontView = 0;
     private int swipeBackView = 0;
+
+    private Rect rect = new Rect();
 
     // Cached ViewConfiguration and system-wide constant values
     private int slop;
@@ -416,10 +419,16 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
                 }
                 if (scrollState==SCROLL_STATE_TOUCH_SCROLL) {
                     listViewMoving = true;
+                    setEnabled(false);
                 }
                 if (scrollState != AbsListView.OnScrollListener.SCROLL_STATE_FLING && scrollState != SCROLL_STATE_TOUCH_SCROLL) {
                     listViewMoving = false;
                     swipeListView.resetScrolling();
+                    new Handler().postDelayed(new Runnable() {
+                        public void run() {
+                            setEnabled(true);
+                        }
+                    }, 500);
                 }
             }
 
@@ -460,7 +469,7 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
                     return false;
                 }
                 swipeCurrentAction = SwipeListView.SWIPE_ACTION_NONE;
-                Rect rect = new Rect();
+
                 int childCount = swipeListView.getChildCount();
                 int[] listViewCoords = new int[2];
                 swipeListView.getLocationOnScreen(listViewCoords);
@@ -526,6 +535,7 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
                 }
                 generateAnimate(frontView, swap, swapRight, downPosition);
 
+                velocityTracker.recycle();
                 velocityTracker = null;
                 downX = 0;
                 // change clickable front view
