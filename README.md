@@ -7,10 +7,11 @@ An Android List View implementation with support for drawable cells and many oth
   - [Maven Dependency](#maven-dependency)
 	- [APKLib and others](#apklib-and-others)
 	- [Dependencies](#dependencies)
+- [XML Usage](#xml-usage)
 
 # Introduction
 
-RESTrung was born out of the need to add swipe gestures to ListView on Android for 
+SwipeListView was born out of the need to add swipe gestures to ListView on Android for 
 @ [47 Degrees](http://47deg.com) Clients. Contributions and constructive feedback are welcome.
 
 # Download
@@ -62,3 +63,38 @@ Depends on your requirements you may choose to include one of the following...
 
 - com.google.android :
     - support-v4 (Available in Maven Central)
+
+# XML Usage
+
+If you decide to use SwipeListView as a view, you can define it in your xml layouts like this:
+
+```xml
+    <com.fortysevendeg.android.swipelistview.SwipeListView
+            xmlns:swipe="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/example_lv_list"
+            android:listSelector="#00000000"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            swipe:swipeFrontView="@+id/front"
+            swipe:swipeBackView="@+id/back"
+            swipe:swipeActionLeft="reveal | dismiss"
+            swipe:swipeActionRight="reveal | dismiss"
+            swipe:swipeMode="none | both | right | left"
+            swipe:swipeCloseAllItemsWhenMoveList="true"
+            swipe:swipeOpenOnLongPress="true"
+            swipe:swipeAnimationTime="2000"
+            swipe:swipeOffsetLeft="50dp"
+            swipe:swipeOffsetRight="50dp"
+            />
+```
+
+* `swipeFrontView` - TODO
+* `swipeBackView` - TODO
+* `swipeActionLeft` - TODO
+* `swipeActionRight` - TODO
+* `swipeMode` - TODO
+* `swipeCloseAllItemsWhenMoveList` - TODO
+* `swipeOpenOnLongPress` - TODO
+* `swipeAnimationTime` - TODO
+* `swipeOffsetLeft` - TODO
+* `swipeOffsetRight` - TODO
