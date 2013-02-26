@@ -1,6 +1,6 @@
 # android-swipelistview
 
-An Android List View implementation with support for drawable cells and many other swipe related features
+An Android List View implementation with support for drawable cells and many other swipe related features.
 
 - [Introduction](#introduction)
 - [Download](#download)
@@ -58,7 +58,7 @@ SwipeListView depends on the following libraries.
 
 - com.nineoldandroids 
 
-SwipeListView expect that you include one the google android [compatibility libraries](http://developer.android.com/intl/es/tools/extras/support-library.html) in order to use Loaders in versions that do not support them natively.
+SwipeListView expects that you include one of the Google Android [compatibility libraries](http://developer.android.com/intl/es/tools/extras/support-library.html) in order to use Loaders in versions that do not support them natively.
 Depending on your requirements you may choose to include one of the following...
 
 - com.google.android :
@@ -90,8 +90,8 @@ If you decide to use SwipeListView as a view, you can define it in your xml layo
 
 * `swipeFrontView` - **Required** - front view id.
 * `swipeBackView` - **Required** - back view id.
-* `swipeActionLeft` - Optional - right swipe action Default: 'reveal'
-* `swipeActionRight` - Optional - left swipe action Default: 'reveal'
+* `swipeActionLeft` - Optional - left swipe action Default: 'reveal'
+* `swipeActionRight` - Optional - right swipe action Default: 'reveal'
 * `swipeMode` - Gestures to enable or 'none'. Default: 'both'
 * `swipeCloseAllItemsWhenMoveList` - Close revealed items on list motion. Default: 'true'
 * `swipeOpenOnLongPress` - Reveal on long press Default: 'true'
