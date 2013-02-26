@@ -59,14 +59,14 @@ SwipeListView depends on the following libraries.
 - com.nineoldandroids 
 
 SwipeListView expect that you include one the google android [compatibility libraries](http://developer.android.com/intl/es/tools/extras/support-library.html) in order to use Loaders in versions that do not support them natively.
-Depends on your requirements you may choose to include one of the following...
+Depending on your requirements you may choose to include one of the following...
 
 - com.google.android :
     - support-v4 (Available in Maven Central)
 
 # XML Usage
 
-If you decide to use SwipeListView as a view, you can define it in your xml layouts like this:
+If you decide to use SwipeListView as a view, you can define it in your xml layout like this:
 
 ```xml
     <com.fortysevendeg.android.swipelistview.SwipeListView
@@ -88,13 +88,13 @@ If you decide to use SwipeListView as a view, you can define it in your xml layo
             />
 ```
 
-* `swipeFrontView` - Identifier item's front view. This attribute is obligatory
-* `swipeBackView` - Identifier item's back view. This attribute is obligatory
-* `swipeActionLeft` - Action when user swipe to left. Default: 'reveal'
-* `swipeActionRight` - Action when user swipe to right. Default: 'reveal'
-* `swipeMode` - You can enable or disable gestures. Default: 'both'
-* `swipeCloseAllItemsWhenMoveList` - You can close all items when user move list. Default: 'true'
-* `swipeOpenOnLongPress` - Open when user longpress on item. Default: 'true'
-* `swipeAnimationTime` - Animation time when user drop item. Default: android configuration
-* `swipeOffsetLeft` - Offset left when item is opened
-* `swipeOffsetRight` - Offset right when item is opened
+* `swipeFrontView` - **Required** - front view id.
+* `swipeBackView` - **Required** - back view id.
+* `swipeActionLeft` - Optional - right swipe action Default: 'reveal'
+* `swipeActionRight` - Optional - left swipe action Default: 'reveal'
+* `swipeMode` - Gestures to enable or 'none'. Default: 'both'
+* `swipeCloseAllItemsWhenMoveList` - Close revealed items on list motion. Default: 'true'
+* `swipeOpenOnLongPress` - Reveal on long press Default: 'true'
+* `swipeAnimationTime` - item drop animation time. Default: android configuration
+* `swipeOffsetLeft` - left offset
+* `swipeOffsetRight` - right offset
