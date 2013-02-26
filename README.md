@@ -77,24 +77,24 @@ If you decide to use SwipeListView as a view, you can define it in your xml layo
             android:layout_height="wrap_content"
             swipe:swipeFrontView="@+id/front"
             swipe:swipeBackView="@+id/back"
-            swipe:swipeActionLeft="reveal | dismiss"
-            swipe:swipeActionRight="reveal | dismiss"
-            swipe:swipeMode="none | both | right | left"
-            swipe:swipeCloseAllItemsWhenMoveList="true"
-            swipe:swipeOpenOnLongPress="true"
-            swipe:swipeAnimationTime="2000"
-            swipe:swipeOffsetLeft="50dp"
-            swipe:swipeOffsetRight="50dp"
+            swipe:swipeActionLeft="[reveal | dismiss]"
+            swipe:swipeActionRight="[reveal | dismiss]"
+            swipe:swipeMode="[none | both | right | left]"
+            swipe:swipeCloseAllItemsWhenMoveList="[true | false]"
+            swipe:swipeOpenOnLongPress="[true | false]"
+            swipe:swipeAnimationTime="[miliseconds]"
+            swipe:swipeOffsetLeft="[dimension]"
+            swipe:swipeOffsetRight="[dimension]"
             />
 ```
 
-* `swipeFrontView` - TODO
-* `swipeBackView` - TODO
-* `swipeActionLeft` - TODO
-* `swipeActionRight` - TODO
-* `swipeMode` - TODO
-* `swipeCloseAllItemsWhenMoveList` - TODO
-* `swipeOpenOnLongPress` - TODO
-* `swipeAnimationTime` - TODO
-* `swipeOffsetLeft` - TODO
-* `swipeOffsetRight` - TODO
+* `swipeFrontView` - Identifier item's front view. This attribute is obligatory
+* `swipeBackView` - Identifier item's back view. This attribute is obligatory
+* `swipeActionLeft` - Action when user swipe to left. Default: 'reveal'
+* `swipeActionRight` - Action when user swipe to right. Default: 'reveal'
+* `swipeMode` - You can enable or disable gestures. Default: 'both'
+* `swipeCloseAllItemsWhenMoveList` - You can close all items when user move list. Default: 'true'
+* `swipeOpenOnLongPress` - Open when user longpress on item. Default: 'true'
+* `swipeAnimationTime` - Animation time when user drop item. Default: android configuration
+* `swipeOffsetLeft` - Offset left when item is opened
+* `swipeOffsetRight` - Offset right when item is opened
